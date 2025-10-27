@@ -26,17 +26,17 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {
 
 
         if(!Auth::user()->shop){
             return view('admin.shop.create');
         }else{
-
+//dd(Order::where('status', 5)->sum('total'));
             $data = [
                 'title' => 'Dashboard',
-                'product' => Product::all()->count(),
-                'category' => Category::all()->count(),
+                'product' => Product::all()->count(),// use count instead of get()->count() for better performance
+                'category' => Category::all()->count(),//same here
                 'sales' => Order::where('status', 5)->sum('total'),
                 'order' => Order::where('status', 5)->count(),
                 'newOrder' => Order::all()->sortByDesc('id')->take(5)

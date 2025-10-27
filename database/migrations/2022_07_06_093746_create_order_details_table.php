@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('order_code');
             $table->string('title');
-            $table->string('price');
-            $table->string('quantity');
+            $table->decimal('price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

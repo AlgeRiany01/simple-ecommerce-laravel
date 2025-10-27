@@ -21,7 +21,11 @@ class CartController extends Controller
     public function addToCart(Request $request){
         $cart = session()->get('cart');
         $id = $request->product_id;
-        $product = Product::where('id', $id)->first();
+
+        //****************************
+        //$product = Product::where('id', $id)->first();
+        //****************************
+        $product = Product::findOrFail($id);
 
         if(isset($cart[$id])) {
             $quantityUpdate = $cart[$id]["quantity"] + $request->quantity;
